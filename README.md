@@ -43,7 +43,7 @@ Made with ❤️ | FLAMES is just a game, enjoy the fun without taking it to you
 
 ## 🚀 Live Demo
 
-Open `flames.html` in your browser to use the calculator.
+Open `index.html` in your browser to use the calculator.
 
 ## 📱 Tech Stack
 
