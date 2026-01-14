@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.5s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 280px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 200;
+            margin-bottom: 4rem;
+            letter-spacing: 0.3em;
+        }
+        
+        .input-group {
+            margin-bottom: 2rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 0.8rem 0;
+            border: none;
+            border-bottom: 1px solid #cccccc;
+            font-size: 0.9rem;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-bottom-color: #000000;
+        }
+        
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #000000;
+            background: transparent;
+            color: #000000;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 3rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        button:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        .result {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .result-letter {
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin: 3rem 0;
+            transition: color 0.3s ease;
+        }
+        
+        .result-meaning {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            transition: color 0.3s ease;
+        }
+        
+        .animation-container {
+            margin: 3rem 0;
+            padding: 2rem 0;
+            min-height: 80px;
+        }
+        
+        .name-display {
+            margin: 1.5rem 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            font-size: 0.8rem;
+            opacity: 0.4;
+        }
+        
+        .char {
+            display: inline-block;
+            padding: 0.2rem 0.4rem;
+            margin: 0.05rem;
+            border: 1px solid #cccccc;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        
+        .char.common {
+            border-color: #000000;
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        .char.removing {
+            animation: fadeOut 0.4s forwards;
+        }
+        
+        .flames-display {
+            font-size: 1rem;
+            font-weight: 300;
+            margin: 2rem 0;
+            letter-spacing: 0.8em;
+        }
+        
+        .flame-char {
+            display: inline-block;
+            padding: 0.4rem 0.6rem;
+            margin: 0 0.1rem;
+            border: 1px solid #000000;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        
+        .flame-char.removing {
+            animation: fadeOut 0.5s forwards;
+        }
+        
+        .flame-char.counting {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+        
+        .count-display {
+            text-align: center;
+            font-size: 0.8rem;
+            margin: 1.5rem 0;
+            opacity: 0.4;
+        }
+        
+        .steps {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #cccccc;
+            font-size: 0.8rem;
+            opacity: 0.4;
+        }
+        
+        .reset-btn {
+            border-color: #000000;
+            color: #000000;
+        }
+        
+        .reset-btn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+        
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #cccccc;
+            text-align: center;
+        }
+        
+        .footer p {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            opacity: 0.5;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FLAMES</h1>
+        
+        <div id="inputSection">
+            <div class="input-group">
+                <input type="text" id="name1" placeholder="First name" autocomplete="off">
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="name2" placeholder="Second name" autocomplete="off">
+            </div>
+            
+            <button onclick="calculateFlames()">Calculate</button>
+        </div>
+        
+        <footer class="footer">
+            <p>Made with ❤️ | FLAMES is just a game, enjoy the fun without taking it to your heart.</p>
+        </footer>
+        
+        <div id="result" class="result">
+            <div class="result-letter" id="resultLetter"></div>
+            <div class="result-meaning" id="resultMeaning"></div>
+            
+            <div class="animation-container">
+                <div id="name1Display" class="name-display"></div>
+                <div id="name2Display" class="name-display"></div>
+                <div id="flamesDisplay" class="flames-display"></div>
+                <div id="countDisplay" class="count-display"></div>
+            </div>
+            
+            <div class="steps" id="steps"></div>
+        </div>
+    </div>
+
+    <script>
+        const meanings = {
+            'F': {text: 'Friends', color: '#2196F3', bgLight: '#E3F2FD'},
+            'L': {text: 'Love', color: '#E91E63', bgLight: '#FCE4EC'},
+            'A': {text: 'Affection', color: '#FF9800', bgLight: '#FFF3E0'},
+            'M': {text: 'Marriage', color: '#9C27B0', bgLight: '#F3E5F5'},
+            'E': {text: 'Enemies', color: '#F44336', bgLight: '#FFEBEE'},
+            'S': {text: 'Siblings', color: '#4CAF50', bgLight: '#E8F5E8'}
+        };
+        
+        function getRelationshipMeaning(letter) {
+            return meanings[letter] || {text: 'Unknown', color: '#000000', bgLight: '#ffffff'};
+        }
+        
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        function displayCharacters(chars, elementId, commonIndices = []) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = '';
+            chars.forEach((char, index) => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                if (commonIndices.includes(index)) span.className += ' common';
+                span.textContent = char.toUpperCase();
+                element.appendChild(span);
+            });
+        }
+        
+        function displayFlames(flames, highlightIndex = -1) {
+            const element = document.getElementById('flamesDisplay');
+            element.innerHTML = '';
+            flames.forEach((char, index) => {
+                const span = document.createElement('span');
+                span.className = 'flame-char';
+                if (index === highlightIndex) span.className += ' counting';
+                span.textContent = char;
+                element.appendChild(span);
+            });
+        }
+        
+        async function animateFlamesCalculation(name1, name2) {
+            const cleanName1 = name1.replace(/\s/g, '').toLowerCase();
+            const cleanName2 = name2.replace(/\s/g, '').toLowerCase();
+            
+            document.getElementById('name1Display').innerHTML = 'Name 1: ';
+            document.getElementById('name2Display').innerHTML = 'Name 2: ';
+            
+            const name1Chars = cleanName1.split('');
+            const name2Chars = cleanName2.split('');
+            
+            displayCharacters(name1Chars, 'name1Display');
+            displayCharacters(name2Chars, 'name2Display');
+            
+            await sleep(800);
+            
+            const commonIndices1 = [];
+            const commonIndices2 = [];
+            
+            for (let i = name1Chars.length - 1; i >= 0; i--) {
+                const char = name1Chars[i];
+                const index = name2Chars.indexOf(char);
+                if (index !== -1) {
+                    commonIndices1.push(i);
+                    commonIndices2.push(index);
+                    name1Chars.splice(i, 1);
+                    name2Chars.splice(index, 1);
+                }
+            }
+            
+            displayCharacters(cleanName1.split(''), 'name1Display', commonIndices1);
+            displayCharacters(cleanName2.split(''), 'name2Display', commonIndices2);
+            
+            await sleep(1200);
+            
+            const spans1 = document.querySelectorAll('.char.common');
+            const spans2 = document.querySelectorAll('#name2Display .char.common');
+            spans1.forEach(span => span.classList.add('removing'));
+            spans2.forEach(span => span.classList.add('removing'));
+            
+            await sleep(400);
+            
+            displayCharacters(name1Chars, 'name1Display');
+            displayCharacters(name2Chars, 'name2Display');
+            
+            const count = name1Chars.length + name2Chars.length;
+            document.getElementById('countDisplay').innerHTML = `Remaining: ${count}`;
+            
+            await sleep(800);
+            
+            let flames = ['F', 'L', 'A', 'M', 'E', 'S'];
+            let currentIndex = 0;
+            
+            displayFlames(flames);
+            
+            while (flames.length > 1) {
+                await sleep(600);
+                
+                const removeIndex = (currentIndex + count - 1) % flames.length;
+                displayFlames(flames, removeIndex);
+                
+                await sleep(500);
+                
+                const removedChar = flames[removeIndex];
+                flames.splice(removeIndex, 1);
+                currentIndex = removeIndex % flames.length;
+                
+                displayFlames(flames);
+                document.getElementById('countDisplay').innerHTML = `Removed ${removedChar}`;
+            }
+            
+            await sleep(800);
+            
+            return flames[0];
+        }
+        
+        async function calculateFlames() {
+            const name1 = document.getElementById('name1').value.trim();
+            const name2 = document.getElementById('name2').value.trim();
+            
+            if (!name1 || !name2) {
+                alert('Please enter both names');
+                return;
+            }
+            
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('resultLetter').textContent = '...';
+            document.getElementById('resultMeaning').textContent = 'Calculating';
+            
+            const result = await animateFlamesCalculation(name1, name2);
+            const relationship = getRelationshipMeaning(result);
+            
+            document.getElementById('resultLetter').textContent = result;
+            document.getElementById('resultMeaning').textContent = relationship.text;
+            
+            // Apply relationship colors
+            document.getElementById('resultLetter').style.color = relationship.color;
+            document.getElementById('resultMeaning').style.color = relationship.color;
+            
+            // Change background color
+            document.body.style.backgroundColor = relationship.bgLight;
+            
+            document.getElementById('steps').innerHTML = `
+                ${name1} + ${name2} = ${result}<br><br>
+                <button onclick="resetCalculator()" class="reset-btn">Again</button>
+            `;
+        }
+        
+        function resetCalculator() {
+            document.getElementById('inputSection').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('name1').value = '';
+            document.getElementById('name2').value = '';
+            
+            // Reset colors to default
+            document.getElementById('resultLetter').style.color = '#000000';
+            document.getElementById('resultMeaning').style.color = '#000000';
+            
+            // Reset background to white
+            document.body.style.backgroundColor = '#ffffff';
+            
+            document.getElementById('name1').focus();
+        }
+        
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') calculateFlames();
+        });
+        
+        document.getElementById('name1').focus();
+    </script>
+</body>
+</html>
