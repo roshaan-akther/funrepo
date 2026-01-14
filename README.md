@@ -1,68 +1,31 @@
-# FLAMES Calculator 💕
+# Just Flames. 💕
 
-A beautifully minimal, animated FLAMES relationship calculator with dynamic colors and smooth interactions.
+More than a game, it's a reminder that connections are complex, beautiful, and never meant to be defined by simple calculations.
 
-## ✨ Features
+## 🎨 The Colors of Connection
 
-- **Minimalist Design**: Clean, compact, and spacious interface
-- **Animated Calculation**: Step-by-step visualization of the FLAMES algorithm
-- **Dynamic Colors**: Each relationship type has its own color scheme
-- **Light Mode**: Bright, clean aesthetic with smooth transitions
-- **Responsive**: Works perfectly on all screen sizes
-- **Interactive**: Smooth animations and micro-interactions
+- **F - Friends**: Blue 💙 (The calm, steady presence)
+- **L - Love**: Pink 💗 (The heart's gentle flutter)
+- **A - Affection**: Orange 💛 (The warmth of fondness)
+- **M - Marriage**: Purple 💜 (The deep, sacred bond)
+- **E - Enemies**: Red ❤️ (The passion of conflict)
+- **S - Siblings**: Green 💚 (The roots of family)
 
-## 🎨 Relationship Colors
+## 🎮 The Playful Dance
 
-- **F - Friends**: Blue 💙
-- **L - Love**: Pink 💗
-- **A - Affection**: Orange 💛
-- **M - Marriage**: Purple 💜
-- **E - Enemies**: Red ❤️
-- **S - Siblings**: Green 💚
+1. Two names enter the story
+2. Watch as letters dance and disappear
+3. Discover what the universe whispers
+4. Remember it's just a beautiful moment
 
-## 🎮 How to Use
+## 🌐 Experience the Magic
 
-1. Enter two names in the input fields
-2. Click "Calculate" or press Enter
-3. Watch the animated calculation process
-4. See your relationship result with dynamic colors
-5. Click "Again" to calculate for different names
+**https://just-flames.vercel.app/**
 
-## 🌟 Algorithm
+## 💝 Our Heartfelt Message
 
-The FLAMES calculator follows the traditional algorithm:
-
-1. Remove common characters from both names
-2. Count the remaining characters
-3. Eliminate FLAMES letters by counting to that number
-4. The last remaining letter determines the relationship
-
-## 💝 Message
-
-Made with ❤️ | FLAMES is just a game, enjoy the fun without taking it to your heart.
-
-## 🚀 Live Demo
-
-Open `index.html` in your browser to use the calculator.
-
-## 📱 Tech Stack
-
-- **HTML5**: Semantic markup
-- **CSS3**: Modern animations and transitions
-- **Vanilla JavaScript**: No frameworks, pure JavaScript
-
-## 🎯 Design Philosophy
-
-- **Extreme Minimalism**: Only essential elements
-- **Maximum Spaciousness**: Clean, breathable layout
-- **Smooth Interactions**: Delightful micro-animations
-- **Color Psychology**: Each relationship type has meaningful colors
-- **User Experience**: Intuitive and enjoyable
-
-## 📄 License
-
-This project is open source and available under the MIT License.
+Made with ❤️ | Just Flames - a beautiful reminder that no algorithm can define the hearts' or minds' true journey.
 
 ---
 
-*Enjoy the game, spread the love! 💕*
+*Play with joy, love with depth, live with authenticity.* 💕
